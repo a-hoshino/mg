@@ -1,4 +1,4 @@
-var mg = mg || {}; mg["common"] =
+var mg = mg || {}; mg["page2"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -45,7 +45,7 @@ var mg = mg || {}; mg["common"] =
 /* 0 */
 /***/ (function(module, exports) {
 
-	console.log('main');
+	console.log('page2');
 
 /***/ })
 /******/ ]);

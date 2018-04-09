@@ -1,10 +1,18 @@
+<% var title = "top" -%>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<%- include('./_include/_head', {type:'top'}) %>
+<%- include('./_include/_head', {pageTitle:title}) %>
 <body>
 <main>
-    <h1>test</h1>
+    <h1>top</h1>
+    <ul>
+<% jsonData.pages.forEach(function (value, key) { %>
+        <li>
+            <a href="./<%= [value] -%>.html"><%= value %></a>
+        </li>
+<% }); %>
+    </ul>
 </main>
-<%- include('./_include/_footer') %>
+<script src="./js/<%= title -%>.js"></script>
 </body>
 </html>

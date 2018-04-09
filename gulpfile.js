@@ -11,6 +11,7 @@ var babel = require('gulp-babel');
 var gulpWebpack = require('gulp-webpack');
 var webpack = require('webpack');
 var autoprefixer = require('gulp-autoprefixer');
+var jsonData = require('./src/ejs/setting.json');
 
 // --------------------------------------------------------
 // Directory
@@ -30,18 +31,28 @@ var path = {
     }
 };
 
+var pages = {
+    top : './src/js/top.js'
+};
+
+jsonData.pages.forEach(function(value, index){
+    pages[value] = './src/js/' + value + '.js';
+});
+
 // --------------------------------------------------------
 // Task
 // --------------------------------------------------------
 gulp.task('ejs', function(){
     return gulp.src([path.src.ejs + '*.ejs', '!' + path.src.ejs + '_*.ejs'])
-        .pipe(ejs())
+        .pipe(ejs({
+            jsonData: jsonData
+        }))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest(path.dest.html));
 });
 
 gulp.task( 'sass', function(){
-    return gulp.src( path.src.sass + '*.scss' )
+    return gulp.src( path.src.sass + '**/*.scss' )
     .pipe( sass({
         outputStyle: 'compressed'
     }))
@@ -55,10 +66,7 @@ gulp.task( 'sass', function(){
 gulp.task('webpack', function(){
     return gulp.src(path.src.js + '**/*.js')
     .pipe( gulpWebpack({
-        entry: {
-            'common': './src/js/common.js',
-            'pages/first': './src/js/pages/first.js'
-        },
+        entry: pages,
         output: {
             path: __dirname + '/docs/js',
             filename: '[name].js',
