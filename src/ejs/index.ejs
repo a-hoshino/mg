@@ -4,8 +4,11 @@
 <%- include('./_include/_head', {pageTitle:title}) %>
 <body>
 <main>
-    <h1>top</h1>
-    <ul>
+    <div class="mg-top">
+        <h1><%= jsonData.sitename %></h1>
+        <h2><%= jsonData.description %></h2>
+    </div>
+    <ul class="mg-list">
 <% jsonData.pages.forEach(function (value, key) { %>
         <li>
             <a href="./<%= [value] -%>.html"><%= value %></a>
