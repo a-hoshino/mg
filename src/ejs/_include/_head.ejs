@@ -1,23 +1,17 @@
-<% var data = {
-    top : {
-        title : 'mg',
-        description : 'Motion graphics for website.',
-        keywords : 'MotionGraphics,webGL,canvas,svg,animation,three.js',
-        url : 'URL'
-    }
-}; -%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="<%= data[type].description -%>">
-    <meta name="keywords" content="<%= data[type].keywords -%>">
-    <meta property="og:title" content="<%= data[type].title -%>">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="<%= data[type].url -%>">
-    <title><%= data[type].title -%></title>
-    <link rel="stylesheet" href="../css/odekake.css">
-    <link rel="apple-touch-icon-precomposed" href="https://img.camily.jp/assets/img/favicon.png">
-    <link rel="shortcut icon" href="https://img.camily.jp/assets/img/favicon.png">
+    <meta name="description" content="<%= jsonData.description -%>">
+    <meta name="keywords" content="<%= jsonData.keywords -%>">
+<% if (pageTitle === 'top') { %>
+    <title><%= jsonData.sitename -%></title>
+<% } else { %>
+    <title><%= pageTitle -%> | <%= jsonData.sitename -%></title>
+<% } %>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/pages/<%= pageTitle -%>.css">
+    <link rel="apple-touch-icon-precomposed" href="">
+    <link rel="shortcut icon" href="">
 </head>

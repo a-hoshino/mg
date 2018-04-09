@@ -1,4 +1,4 @@
-var mg = mg || {}; mg["pages/first"] =
+var mg = mg || {}; mg["top"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -45,7 +45,7 @@ var mg = mg || {}; mg["pages/first"] =
 /* 0 */
 /***/ (function(module, exports) {
 
-	console.log('pages');
+	console.log('top');
 
 /***/ })
 /******/ ]);
