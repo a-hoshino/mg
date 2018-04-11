@@ -4,14 +4,14 @@
 <%- include('./_include/_head', {pageTitle:title}) %>
 <body>
 <main>
-    <div class="mg-top">
-        <h1><%= jsonData.sitename %></h1>
-        <h2><%= jsonData.description %></h2>
+    <div class="mg-container">
+        <h1 class="mg-text-xl"><%= jsonData.sitename %></h1>
+        <h2 class="mg-text-s"><%= jsonData.description %></h2>
     </div>
     <ul class="mg-list">
 <% jsonData.pages.forEach(function (value, key) { %>
         <li>
-            <a href="./<%= [value] -%>.html"><%= value %></a>
+            <a class="mg-text-m" href="./works/<%= [value] -%>.html"><%= value %></a>
         </li>
 <% }); %>
     </ul>

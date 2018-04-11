@@ -15,24 +15,11 @@
 // Page Style
 // --------------------------------------------------------
 
-.mg-top{
-    padding: 4rem 0 2rem 0;
-
-    & h1{
-        margin-bottom: 1rem;
-        font-size: 3rem;
-        font-weight: 800;
-    }
-
-    & h2{
-        font-size: 1.0rem;
-    }
+main{
+    text-align: center;
 }
 
 .mg-list{
-    padding: 2rem;
-    font-size: 1.4rem;
-
     & li{
         margin-bottom: 2rem;
     }

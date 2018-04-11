@@ -7,10 +7,11 @@
     <meta name="keywords" content="<%= jsonData.keywords -%>">
 <% if (pageTitle === 'top') { %>
     <title><%= jsonData.sitename -%></title>
+    <link rel="stylesheet" href="./css/<%= pageTitle -%>.css">
 <% } else { %>
     <title><%= pageTitle -%> | <%= jsonData.sitename -%></title>
+    <link rel="stylesheet" href="../css/<%= pageTitle -%>.css">
 <% } %>
-    <link rel="stylesheet" href="./css/<%= pageTitle -%>.css">
     <link rel="apple-touch-icon-precomposed" href="">
     <link rel="shortcut icon" href="">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">

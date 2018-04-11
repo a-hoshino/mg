@@ -18,7 +18,7 @@ var jsonData = require('./src/ejs/setting.json');
 // --------------------------------------------------------
 var path = {
     src: {
-        ejs: './src/ejs/',
+        ejs: './src/ejs/**/',
         sass: './src/sass/',
         img: './src/img/**/',
         js: './src/js/**/'
