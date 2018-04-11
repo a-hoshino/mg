@@ -70,9 +70,9 @@ var mg = mg || {}; mg["geometry"] =
 
 	        this.camera = new THREE.PerspectiveCamera(45, this.size.width / this.size.height, 1, 10000);
 
-	        this.rot = 100;
+	        this.rot = 0;
 
-	        this.distance = 2000;
+	        this.distance = 3000 - this.size.width;
 	    }
 
 	    /**
@@ -91,7 +91,13 @@ var mg = mg || {}; mg["geometry"] =
 
 	        // ウィンドウに合わせてキャンバスをリサイズする
 	        window.addEventListener('resize', () => {
-	            this.resizeCanvas(window.innerWidth, window.innerHeight);
+	            [this.size.width, this.size.height] = [window.innerWidth, window.innerHeight];
+
+	            this.distance = 3000 - this.size.width;
+
+	            this.resetCamera();
+
+	            this.resizeCanvas(this.size.width, this.size.height);
 
 	            this.renderer.render(this.scene, this.camera);
 	        });
@@ -116,8 +122,6 @@ var mg = mg || {}; mg["geometry"] =
 	     * キャンバスサイズを設定する
 	     */
 	    resizeCanvas(width, height) {
-	        [this.size.width, this.size.height] = [width, height];
-
 	        this.camera.aspect = width / height;
 
 	        this.camera.updateProjectionMatrix();
@@ -126,25 +130,59 @@ var mg = mg || {}; mg["geometry"] =
 	    }
 
 	    /**
-	     * シーンを作成する
+	     * シーンを構成する
 	     */
 	    createScene() {
-	        // 球体を作成
-	        const geometry = new THREE.SphereGeometry(300, 30, 30);
-	        const material = new THREE.MeshStandardMaterial({ color: 0xff86be });
+	        this.addBall();
 
-	        // メッシュを作成
+	        this.addCube();
+
+	        this.addLight();
+	    }
+
+	    /**
+	     * ボールを追加する
+	     */
+	    addBall() {
+	        // 球体
+	        const geometry = new THREE.SphereGeometry(200, 30, 30);
+	        const material = new THREE.MeshLambertMaterial({ color: 0xf78bbb });
+
 	        const mesh = new THREE.Mesh(geometry, material);
 
-	        // 3D空間にメッシュを追加
+	        mesh.position.set(-240, 0, 0);
+
 	        this.scene.add(mesh);
+	    }
 
+	    /**
+	     * キューブを追加する
+	     */
+	    addCube() {
+	        // キューブ
+	        const geometry = new THREE.BoxBufferGeometry(280, 280, 280);
+	        const material = new THREE.MeshLambertMaterial({ color: 0x74aae6 });
+
+	        const mesh = new THREE.Mesh(geometry, material);
+
+	        mesh.position.set(240, 0, 0);
+	        mesh.rotation.set(Math.PI / 4, Math.PI / 4, 0);
+
+	        this.scene.add(mesh);
+	    }
+
+	    /**
+	     * ライトを追加する
+	     */
+	    addLight() {
 	        // 平行光源
-	        const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
+	        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, .8);
 	        directionalLight.position.set(1, 1, 1);
-
-	        // シーンに追加
 	        this.scene.add(directionalLight);
+
+	        // 環境光源を作成
+	        const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.0);
+	        this.scene.add(ambientLight);
 	    }
 	}
 
