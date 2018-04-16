@@ -1,13 +1,49 @@
 html,body{
+    color: $text-color;
     font-size: 14px;
     font-family: 'Maven Pro', sans-serif;
     letter-spacing: 0.04em;
 }
 
-main{
-    text-align: center;
+h1{
+    color: $main-color;
+}
+
+h2{
+    color: rgba($main-color,.8);
 }
 
 a{
     text-decoration: underline;
+}
+
+#canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.mg-text-xl{
+    font-size: 4rem;
+}
+
+.mg-text-l{
+    font-size: 2.4rem;
+}
+
+.mg-text-m{
+    font-size: 1.6rem;
+}
+
+.mg-text-s{
+    font-size: 1.2rem;
+}
+
+.mg-text-xs{
+    font-size: 0.8rem;
+}
+
+.mg-container{
+    padding: 4rem;
 }

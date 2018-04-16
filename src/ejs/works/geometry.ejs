@@ -1,0 +1,16 @@
+<% var title = "geometry" -%>
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+<%- include('../_include/_head', {pageTitle:title}) %>
+<body>
+<main>
+    <div class="mg-container">
+        <h1 class="mg-text-l"><%= title %></h1>
+        <a class="mg-text-s" href="../index.html">top</a>
+    </div>
+    <canvas id="canvas"></canvas>
+</main>
+<script src="../js/libs/three.min.js"></script>
+<script src="../js/<%= title -%>.js"></script>
+</body>
+</html>

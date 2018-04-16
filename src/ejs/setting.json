@@ -4,6 +4,6 @@
     "keywords" : "MotionGraphics,webGL,canvas,svg,animation,three.js",
     "url" : "https://a-hoshino.github.io/mg/",
     "pages" : [
-        "page1"
+        "geometry"
     ]
 }
