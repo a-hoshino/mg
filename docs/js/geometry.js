@@ -70,8 +70,10 @@ var mg = mg || {}; mg["geometry"] =
 
 	        this.camera = new THREE.PerspectiveCamera(45, this.size.width / this.size.height, 1, 10000);
 
-	        this.rot = 0;
+	        // 撮影角度
+	        this.rot = 10;
 
+	        // 撮影距離
 	        this.distance = 3000 - this.size.width;
 	    }
 
@@ -80,6 +82,8 @@ var mg = mg || {}; mg["geometry"] =
 	     */
 	    init() {
 	        this.renderer.setClearColor(0xFFFFFF, 1.0);
+
+	        this.renderer.shadowMap.enabled = true;
 
 	        this.resetCamera();
 
@@ -111,7 +115,7 @@ var mg = mg || {}; mg["geometry"] =
 	        const radian = this.rot * Math.PI / 180;
 
 	        // 角度に応じてカメラの位置を設定
-	        this.camera.position.x = this.distance * Math.sin(radian);
+	        this.camera.position.y = this.distance * Math.sin(radian);
 	        this.camera.position.z = this.distance * Math.cos(radian);
 
 	        // 原点方向を見つめる
@@ -137,6 +141,8 @@ var mg = mg || {}; mg["geometry"] =
 
 	        this.addCube();
 
+	        this.addHoop();
+
 	        this.addLight();
 	    }
 
@@ -145,12 +151,14 @@ var mg = mg || {}; mg["geometry"] =
 	     */
 	    addBall() {
 	        // 球体
-	        const geometry = new THREE.SphereGeometry(200, 30, 30);
+	        const geometry = new THREE.SphereGeometry(100, 30, 30);
 	        const material = new THREE.MeshLambertMaterial({ color: 0xf78bbb });
 
 	        const mesh = new THREE.Mesh(geometry, material);
 
-	        mesh.position.set(-240, 0, 0);
+	        mesh.castShadow = true;
+
+	        mesh.position.set(40, 250, 0);
 
 	        this.scene.add(mesh);
 	    }
@@ -160,13 +168,46 @@ var mg = mg || {}; mg["geometry"] =
 	     */
 	    addCube() {
 	        // キューブ
-	        const geometry = new THREE.BoxBufferGeometry(280, 280, 280);
+	        const geometry = new THREE.BoxBufferGeometry(300, 300, 300);
 	        const material = new THREE.MeshLambertMaterial({ color: 0x74aae6 });
 
 	        const mesh = new THREE.Mesh(geometry, material);
 
-	        mesh.position.set(240, 0, 0);
-	        mesh.rotation.set(Math.PI / 4, Math.PI / 4, 0);
+	        mesh.receiveShadow = true;
+
+	        mesh.position.set(0, 0, 0);
+	        mesh.rotation.set(0, Math.PI / 4, 0);
+
+	        this.scene.add(mesh);
+	    }
+
+	    /**
+	     * フープを追加する
+	     */
+	    addHoop() {
+	        // フープ
+	        const geometry = new THREE.RingBufferGeometry(300, 310, 640);
+	        const material = new THREE.MeshPhongMaterial({ color: 0xeeeeee });
+
+	        const mesh = new THREE.Mesh(geometry, material);
+
+	        mesh.position.set(-100, 150, -200);
+	        mesh.rotation.set(0, 0, 0);
+
+	        this.scene.add(mesh);
+	    }
+
+	    /**
+	     * 背景を追加する
+	     */
+	    addBackground() {
+	        const geometry = new THREE.PlaneBufferGeometry(100, 100);
+	        const material = new THREE.MeshLambertMaterial({ color: 0xeeeeee });
+
+	        const mesh = new THREE.Mesh(geometry, material);
+
+	        mesh.position.set(0, -500, 0);
+	        mesh.rotation.set(Math.PI / 4, 0, 0);
 
 	        this.scene.add(mesh);
 	    }
@@ -176,12 +217,19 @@ var mg = mg || {}; mg["geometry"] =
 	     */
 	    addLight() {
 	        // 平行光源
-	        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, .8);
-	        directionalLight.position.set(1, 1, 1);
-	        this.scene.add(directionalLight);
+	        // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, .2);
+	        // directionalLight.position.set(2000, 3200, 2000);
+	        // directionalLight.castShadow = true;
+	        // this.scene.add(directionalLight);
+
+	        // スポット光源
+	        const spotLight = new THREE.SpotLight(0xFFFFFF, .6);
+	        spotLight.position.set(2000, 3200, 2000);
+	        spotLight.castShadow = true;
+	        this.scene.add(spotLight);
 
 	        // 環境光源を作成
-	        const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.0);
+	        const ambientLight = new THREE.AmbientLight(0xFFFFFF, .7);
 	        this.scene.add(ambientLight);
 	    }
 	}
